@@ -1,0 +1,13 @@
+spring:
+  main:
+    banner-mode: off
+    log-startup-info: false
+  kafka:
+    consumer:
+      group-id: test-consumer
+      auto-offset-reset: earliest
+    properties: {}
+
+test:
+  topics:
+    - name: ${topics.users}

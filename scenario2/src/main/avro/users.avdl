@@ -1,0 +1,16 @@
+@namespace("eu.cymo.scenario_2.users")
+protocol Users {
+
+	record UserCreated {
+		string id;
+		string firstName;
+		string lastName;
+		string emailAddress;
+		boolean validated;
+	}
+	
+	record UserValidated {
+		string id;
+	}
+
+}

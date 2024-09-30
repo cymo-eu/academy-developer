@@ -1,5 +1,6 @@
 package eu.cymo.scenario_2.adapter.kafka;
 
+import org.apache.avro.specific.SpecificRecord;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.springframework.beans.factory.ObjectProvider;
@@ -11,24 +12,26 @@ import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
 import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
 
+import io.confluent.kafka.streams.serdes.avro.SpecificAvroDeserializer;
+
 @Configuration
 public class ConsumerConfiguration {
 
 	@Bean
-	public ConsumerFactory<String, String> stringConsumerFactory(
+	public ConsumerFactory<String, SpecificRecord> specificRecordConsumerFactory(
 			KafkaProperties kafkaProperties,
 			ObjectProvider<SslBundles> sslBundles) {
 		var properties = kafkaProperties.buildConsumerProperties(sslBundles.getIfAvailable());
 		properties.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
-		properties.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class);
+		properties.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, SpecificAvroDeserializer.class);
 		properties.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
 		return new DefaultKafkaConsumerFactory<>(properties);
 	}
 	
 	@Bean
-	public ConcurrentKafkaListenerContainerFactory<String, String> stringContainerFactory(
-			ConsumerFactory<String, String> userConsumerFactory) {
-		var factory = new ConcurrentKafkaListenerContainerFactory<String, String>();
+	public ConcurrentKafkaListenerContainerFactory<String, SpecificRecord> specificRecordContainerFactory(
+			ConsumerFactory<String, SpecificRecord> userConsumerFactory) {
+		var factory = new ConcurrentKafkaListenerContainerFactory<String, SpecificRecord>();
 		factory.setConsumerFactory(userConsumerFactory);
 		return factory;
 	}

@@ -4,3 +4,8 @@ topics:
 consumers:
   user-persistence: user-persister
   user-mail: user-mailer
+
+spring:
+  kafka:
+    producer:
+      value-serializer: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerializer

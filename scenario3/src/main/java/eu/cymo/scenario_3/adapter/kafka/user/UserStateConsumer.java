@@ -70,7 +70,9 @@ public class UserStateConsumer {
 			userRepository.save(updated);
 			userStatePublisher.upserted(updated);
 		}
-		throw new RuntimeException("No user found for id '%s'".formatted(evt.getId()));
+		else {
+			throw new RuntimeException("No user found for id '%s'".formatted(evt.getId()));
+		}
 	}
 	
 	private void updated(UserUpdated evt) throws PublishUserEventException {
@@ -85,7 +87,13 @@ public class UserStateConsumer {
 		userStatePublisher.upserted(user);
 	}
 	
-	private void deleted(String id) {
-		
+	private void deleted(String id) throws PublishUserEventException {
+		if(userRepository.findById(id).isPresent()) {
+			userRepository.delete(id);
+			userStatePublisher.deleted(id);
+		}
+		else {
+			throw new RuntimeException("No user found for id '%s'".formatted(id));
+		}
 	}
 }

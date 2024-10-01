@@ -6,13 +6,13 @@ import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import eu.cymo.kafka_streams.demo.UserCreated;
-import eu.cymo.kafka_streams.demo.UserValidated;
 import eu.cymo.scenario_3.domain.user.PublishUserEventException;
 import eu.cymo.scenario_3.domain.user.User;
 import eu.cymo.scenario_3.domain.user.UserRepository;
 import eu.cymo.scenario_3.domain.user.UserStatePublisher;
+import eu.cymo.scenario_3.users.UserCreated;
 import eu.cymo.scenario_3.users.UserUpdated;
+import eu.cymo.scenario_3.users.UserValidated;
 
 @Component
 public class UserStateConsumer {

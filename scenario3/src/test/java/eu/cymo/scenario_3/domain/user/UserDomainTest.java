@@ -24,13 +24,13 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import eu.cymo.kafka_streams.demo.UserCreated;
-import eu.cymo.kafka_streams.demo.UserValidated;
 import eu.cymo.scenario_3.kafka_container.ConsumerAssert;
 import eu.cymo.scenario_3.kafka_container.KafkaContainerTest;
 import eu.cymo.scenario_3.kafka_container.TestConsumer;
+import eu.cymo.scenario_3.users.UserCreated;
 import eu.cymo.scenario_3.users.UserUpdated;
 import eu.cymo.scenario_3.users.UserUpserted;
+import eu.cymo.scenario_3.users.UserValidated;
 
 @KafkaContainerTest(
 		includeFilters = @ComponentScan.Filter(type = REGEX, pattern = {

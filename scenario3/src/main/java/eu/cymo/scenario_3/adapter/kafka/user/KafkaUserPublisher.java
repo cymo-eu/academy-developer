@@ -8,12 +8,12 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 
-import eu.cymo.kafka_streams.demo.UserCreated;
-import eu.cymo.kafka_streams.demo.UserValidated;
 import eu.cymo.scenario_3.adapter.kafka.ProducerRecordBuilder;
 import eu.cymo.scenario_3.domain.user.PublishUserEventException;
 import eu.cymo.scenario_3.domain.user.User;
 import eu.cymo.scenario_3.domain.user.UserPublisher;
+import eu.cymo.scenario_3.users.UserCreated;
+import eu.cymo.scenario_3.users.UserValidated;
 
 @Component
 public class KafkaUserPublisher implements UserPublisher {

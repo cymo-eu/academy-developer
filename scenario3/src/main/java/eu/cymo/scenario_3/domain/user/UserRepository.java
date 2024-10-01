@@ -8,4 +8,6 @@ public interface UserRepository {
 	
 	Optional<User> findById(String id);
 	
+	void delete(String id);
+	
 }

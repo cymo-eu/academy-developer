@@ -26,6 +26,11 @@ public class JpaUserRepository implements UserRepository {
 		return repo.findById(id)
 				.map(this::toUser);
 	}
+
+	@Override
+	public void delete(String id) {
+		repo.deleteById(id);
+	}
 	
 	private UserEntity toUserEntity(User user) {
 		return new UserEntity(

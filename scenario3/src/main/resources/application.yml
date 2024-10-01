@@ -1,0 +1,12 @@
+topics:
+  users: users
+  users-state: users-state
+  
+consumers:
+  user-state: user-state-builder
+  user-mail: user-mailer
+
+spring:
+  kafka:
+    producer:
+      value-serializer: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerializer

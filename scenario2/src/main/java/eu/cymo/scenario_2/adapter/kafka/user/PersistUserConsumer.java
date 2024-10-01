@@ -7,10 +7,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
-import eu.cymo.kafka_streams.demo.UserCreated;
-import eu.cymo.kafka_streams.demo.UserValidated;
 import eu.cymo.scenario_2.domain.user.User;
 import eu.cymo.scenario_2.domain.user.UserRepository;
+import eu.cymo.scenario_2.users.UserCreated;
+import eu.cymo.scenario_2.users.UserValidated;
 
 @Component
 public class PersistUserConsumer {	

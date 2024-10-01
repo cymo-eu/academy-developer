@@ -108,6 +108,7 @@ class UserDomainTest {
 							.satisfies(
 									i -> assertThat(i.key()).isEqualTo(user.id()),
 									i -> assertThat(i.value())
+											.isNotNull()
 											.satisfies(
 													r -> assertThat(r.get("id")).isEqualTo(user.id()),
 													r -> assertThat(r.get("firstName")).isEqualTo("Publishes"),
@@ -190,6 +191,7 @@ class UserDomainTest {
 							.satisfies(
 									i -> assertThat(i.key()).isEqualTo(user.id()),
 									i -> assertThat(i.value())
+											.isNotNull()
 											.satisfies(
 													r -> assertThat(r.get("id")).isEqualTo(user.id()),
 													r -> assertThat(r.get("firstName")).isEqualTo("New"),
@@ -247,6 +249,7 @@ class UserDomainTest {
 								.satisfies(
 										i -> assertThat(i.key()).isEqualTo(user.id()),
 										i -> assertThat(i.value())
+											.isNotNull()
 											.satisfies(
 													r -> assertThat(r.get("id")).isEqualTo(user.id()),
 													r -> assertThat(r.getSchema().getName()).isEqualTo(UserValidated.SCHEMA$.getName()))));
@@ -303,6 +306,7 @@ class UserDomainTest {
 										i -> assertThat(i.key()).isEqualTo(user.id()),
 										i -> assertThat(i.value())
 												.satisfies(
+														r -> assertThat(r).isNotNull(),
 														r -> assertThat(r.get("id")).isEqualTo(user.id()),
 														r -> assertThat(r.get("firstName")).isEqualTo("New"),
 														r -> assertThat(r.get("lastName")).isEqualTo("User"),
@@ -403,6 +407,7 @@ class UserDomainTest {
 								.satisfies(
 										i -> assertThat(i.key()).isEqualTo(user.id()),
 										i -> assertThat(i.value())
+												.isNotNull()
 												.satisfies(
 														r -> assertThat(r.get("id")).isEqualTo(updatedUser.id()),
 														r -> assertThat(r.get("firstName")).isEqualTo("Publishes"),
@@ -480,6 +485,7 @@ class UserDomainTest {
 								.satisfies(
 										i -> assertThat(i.key()).isEqualTo(user.id()),
 										i -> assertThat(i.value())
+												.isNotNull()
 												.satisfies(
 														r -> assertThat(r.get("id")).isEqualTo(user.id()),
 														r -> assertThat(r.get("firstName")).isEqualTo("Publishes"),
@@ -501,7 +507,7 @@ class UserDomainTest {
 				var randomId = UUID.randomUUID();
 				
 				//then
-				mvc.perform(MockMvcRequestBuilders.delete("/users/{id}", randomId)
+				mvc.perform(MockMvcRequestBuilders.put("/users/{id}", randomId)
 						.contentType(MediaType.APPLICATION_JSON)
 						.content("""
 							{

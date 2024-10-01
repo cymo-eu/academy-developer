@@ -14,10 +14,10 @@ import eu.cymo.scenario_3.adapter.kafka.ProducerRecordBuilder;
 import eu.cymo.scenario_3.domain.user.PublishUserEventException;
 import eu.cymo.scenario_3.domain.user.User;
 import eu.cymo.scenario_3.domain.user.UserPublisher;
+import eu.cymo.scenario_3.users.UserUpdated;
 
 @Component
 public class KafkaUserPublisher implements UserPublisher {
-	
 	private final String topic;
 	private final KafkaTemplate<String, SpecificRecord> template;
 	
@@ -56,14 +56,26 @@ public class KafkaUserPublisher implements UserPublisher {
 
 	@Override
 	public void updated(User user) throws PublishUserEventException {
-		// TODO Auto-generated method stub
-		
+		send(ProducerRecordBuilder.<String, SpecificRecord>newBuilder()
+				.topic(topic)
+				.key(user.id())
+				.value(UserUpdated.newBuilder()
+						.setId(user.id())
+						.setFirstName(user.firstName())
+						.setLastName(user.lastName())
+						.setEmailAddress(user.emailAddress())
+						.setValidated(user.validated())
+						.build())
+				.build());
 	}
 
 	@Override
 	public void deleted(String userId) throws PublishUserEventException {
-		// TODO Auto-generated method stub
-		
+		send(ProducerRecordBuilder.<String, SpecificRecord>newBuilder()
+				.topic(topic)
+				.key(userId)
+				.value(null)
+				.build());
 	}
 	
 	private void send(ProducerRecord<String, SpecificRecord> record) throws PublishUserEventException {

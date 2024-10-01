@@ -2,6 +2,7 @@ package eu.cymo.scenario_3.adapter.http.user;
 
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -18,7 +19,6 @@ import eu.cymo.scenario_3.domain.user.UserResponseDto;
 @RestController
 @RequestMapping(path = "/users")
 public class UserController {
-	
 	private final KafkaUserPublisher userPublisher;
 	private final UserRepository repo;
 	
@@ -35,7 +35,6 @@ public class UserController {
 	public ResponseEntity<UserResponseDto> createUser(
 			@RequestBody UserRequestDto userDto) throws Exception {
 		var user = userDto.generateUser();
-		
 		userPublisher.created(user);
 		
 		return ResponseEntity.ok(UserResponseDto.fromUser(user));
@@ -84,6 +83,8 @@ public class UserController {
 				.build();
 	}
 	
+	@DeleteMapping(
+			path = "/{id}")
 	public ResponseEntity<Void> deleteUser(
 			@PathVariable("id") String id) throws Exception {
 		var userO = repo.findById(id);

@@ -108,13 +108,15 @@ class UserDomainTest {
 							.satisfies(
 									i -> assertThat(i.key()).isEqualTo(user.id()),
 									i -> assertThat(i.value())
+											.isNotNull()
+											.satisfies(
+													r -> assertThat(r.getSchema().getName()).isEqualTo(UserCreated.SCHEMA$.getName()))
 											.satisfies(
 													r -> assertThat(r.get("id")).isEqualTo(user.id()),
 													r -> assertThat(r.get("firstName")).isEqualTo("Publishes"),
 													r -> assertThat(r.get("lastName")).isEqualTo("User"),
 													r -> assertThat(r.get("emailAddress")).isEqualTo("publishes-user@test.com"),
-													r -> assertThat(r.get("validated")).isEqualTo(false),
-													r -> assertThat(r.getSchema().getName()).isEqualTo(UserCreated.SCHEMA$.getName()))));
+													r -> assertThat(r.get("validated")).isEqualTo(false))));
 			});
 		}
 
@@ -190,13 +192,15 @@ class UserDomainTest {
 							.satisfies(
 									i -> assertThat(i.key()).isEqualTo(user.id()),
 									i -> assertThat(i.value())
+											.isNotNull()
+											.satisfies(
+													r -> assertThat(r.getSchema().getName()).isEqualTo(UserUpserted.SCHEMA$.getName()))
 											.satisfies(
 													r -> assertThat(r.get("id")).isEqualTo(user.id()),
 													r -> assertThat(r.get("firstName")).isEqualTo("New"),
 													r -> assertThat(r.get("lastName")).isEqualTo("User"),
 													r -> assertThat(r.get("emailAddress")).isEqualTo("new-user@test.com"),
-													r -> assertThat(r.get("validated")).isEqualTo(false),
-													r -> assertThat(r.getSchema().getName()).isEqualTo(UserUpserted.SCHEMA$.getName()))));
+													r -> assertThat(r.get("validated")).isEqualTo(false))));
 			});
 		}
 		
@@ -247,9 +251,11 @@ class UserDomainTest {
 								.satisfies(
 										i -> assertThat(i.key()).isEqualTo(user.id()),
 										i -> assertThat(i.value())
+											.isNotNull()
 											.satisfies(
-													r -> assertThat(r.get("id")).isEqualTo(user.id()),
-													r -> assertThat(r.getSchema().getName()).isEqualTo(UserValidated.SCHEMA$.getName()))));
+													r -> assertThat(r.getSchema().getName()).isEqualTo(UserValidated.SCHEMA$.getName()))
+											.satisfies(
+													r -> assertThat(r.get("id")).isEqualTo(user.id()))));
 				});
 			}
 			
@@ -302,13 +308,15 @@ class UserDomainTest {
 								.satisfies(
 										i -> assertThat(i.key()).isEqualTo(user.id()),
 										i -> assertThat(i.value())
+												.isNotNull()
+												.satisfies(
+														r -> assertThat(r.getSchema().getName()).isEqualTo(UserUpserted.SCHEMA$.getName()))
 												.satisfies(
 														r -> assertThat(r.get("id")).isEqualTo(user.id()),
 														r -> assertThat(r.get("firstName")).isEqualTo("New"),
 														r -> assertThat(r.get("lastName")).isEqualTo("User"),
 														r -> assertThat(r.get("emailAddress")).isEqualTo("new-user@test.com"),
-														r -> assertThat(r.get("validated")).isEqualTo(true),
-														r -> assertThat(r.getSchema().getName()).isEqualTo(UserUpserted.SCHEMA$.getName()))));
+														r -> assertThat(r.get("validated")).isEqualTo(true))));
 				});
 			}
 		}
@@ -403,13 +411,15 @@ class UserDomainTest {
 								.satisfies(
 										i -> assertThat(i.key()).isEqualTo(user.id()),
 										i -> assertThat(i.value())
+												.isNotNull()
+												.satisfies(
+														r -> assertThat(r.getSchema().getName()).isEqualTo(UserUpdated.SCHEMA$.getName()))
 												.satisfies(
 														r -> assertThat(r.get("id")).isEqualTo(updatedUser.id()),
 														r -> assertThat(r.get("firstName")).isEqualTo("Publishes"),
 														r -> assertThat(r.get("lastName")).isEqualTo("User"),
 														r -> assertThat(r.get("emailAddress")).isEqualTo("publishes-user@test.com"),
-														r -> assertThat(r.get("validated")).isEqualTo(false),
-														r -> assertThat(r.getSchema().getName()).isEqualTo(UserUpdated.SCHEMA$.getName()))));
+														r -> assertThat(r.get("validated")).isEqualTo(false))));
 				});
 			}
 			
@@ -480,13 +490,15 @@ class UserDomainTest {
 								.satisfies(
 										i -> assertThat(i.key()).isEqualTo(user.id()),
 										i -> assertThat(i.value())
+												.isNotNull()
+												.satisfies(
+														r -> assertThat(r.getSchema().getName()).isEqualTo(UserUpserted.SCHEMA$.getName()))
 												.satisfies(
 														r -> assertThat(r.get("id")).isEqualTo(user.id()),
 														r -> assertThat(r.get("firstName")).isEqualTo("Publishes"),
 														r -> assertThat(r.get("lastName")).isEqualTo("User"),
 														r -> assertThat(r.get("emailAddress")).isEqualTo("publishes-user@test.com"),
-														r -> assertThat(r.get("validated")).isEqualTo(false),
-														r -> assertThat(r.getSchema().getName()).isEqualTo(UserUpserted.SCHEMA$.getName()))));
+														r -> assertThat(r.get("validated")).isEqualTo(false))));
 				});
 			}
 			
@@ -501,7 +513,7 @@ class UserDomainTest {
 				var randomId = UUID.randomUUID();
 				
 				//then
-				mvc.perform(MockMvcRequestBuilders.delete("/users/{id}", randomId)
+				mvc.perform(MockMvcRequestBuilders.put("/users/{id}", randomId)
 						.contentType(MediaType.APPLICATION_JSON)
 						.content("""
 							{

@@ -1,5 +1,6 @@
 package eu.cymo.stream;
 
+import org.apache.kafka.common.serialization.LongDeserializer;
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.apache.kafka.streams.StreamsBuilder;
@@ -14,7 +15,7 @@ class StreamTopologyTest {
 	private TopologyTestDriver driver;
 
 	private TestInputTopic<String, String> input;
-	private TestOutputTopic<String, String> output;
+	private TestOutputTopic<String, Long> output;
 	
 	@BeforeEach
 	void setup() {
@@ -25,7 +26,7 @@ class StreamTopologyTest {
 		driver = new TopologyTestDriver(topology);
 		
 		input = driver.createInputTopic("input", new StringSerializer(), new StringSerializer());
-		output = driver.createOutputTopic("output", new StringDeserializer(), new StringDeserializer());
+		output = driver.createOutputTopic("output", new StringDeserializer(), new LongDeserializer());
 	}
 	
 	@AfterEach
@@ -35,6 +36,9 @@ class StreamTopologyTest {
 
 	@Test
 	void doSomeTests() {
+		input.pipeInput("key-1", "this is a senctence with some words");
+		input.pipeInput("key-2", "let's add a couple more words");
+		input.pipeInput("key-3", "and finish with some final words");
 	}
 
 }

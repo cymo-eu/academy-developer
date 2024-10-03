@@ -6,7 +6,7 @@
 
 	<!-- Project coordinates -->
 	<groupId>eu.cymo</groupId>
-	<artifactId>stream-consumer</artifactId>
+	<artifactId>stream</artifactId>
 	<version>1.0</version>
 	<packaging>jar</packaging>
 

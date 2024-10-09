@@ -5,9 +5,9 @@ import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
-import eu.cymo.scenario_3.users.UserCreated;
 import eu.cymo.scenario_3.domain.user.User;
 import eu.cymo.scenario_3.domain.user.UserMailService;
+import eu.cymo.scenario_3.users.UserCreated;
 
 @Component
 public class MailUserConsumer {

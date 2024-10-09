@@ -9,4 +9,5 @@ consumers:
 spring:
   kafka:
     producer:
+      transaction-id-prefix: user-application
       value-serializer: io.confluent.kafka.streams.serdes.avro.SpecificAvroSerializer

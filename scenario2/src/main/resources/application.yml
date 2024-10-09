@@ -1,0 +1,6 @@
+topics:
+  users: users
+  
+consumers:
+  user-persistence: user-persister
+  user-mail: user-mailer

@@ -92,7 +92,7 @@ public class UserDomainTest {
 	}
 
 	@Test
-	void processesUserValidtaed() {
+	void processesUserUpdated() {
 		// given
 		var created = UserCreated.newBuilder()
 				.setId(UUID.randomUUID().toString())
@@ -102,7 +102,7 @@ public class UserDomainTest {
 				.setValidated(false)
 				.build();
 		var updated = UserUpdated.newBuilder()
-				.setId(UUID.randomUUID().toString())
+				.setId(created.getId())
 				.setFirstName("first-name-updated")
 				.setLastName("last-name")
 				.setEmailAddress("email-address")
@@ -167,6 +167,30 @@ public class UserDomainTest {
 							.setEmailAddress("email-address-1")
 							.setValidated(true)
 							.build()));
+	}
+	
+	@Test
+	void tombstonesUserWhenValueNull() {
+		// given
+		var created = UserCreated.newBuilder()
+				.setId(UUID.randomUUID().toString())
+				.setFirstName("first-name")
+				.setLastName("last-name")
+				.setEmailAddress("email-address")
+				.setValidated(false)
+				.build();
+		
+		// when
+		userTopic.pipeInput(created.getId(), created);
+		userTopic.pipeInput(created.getId(), null);
+		
+		// then
+		assertThat(userStateTopic.readKeyValuesToList())
+			.hasSize(2)
+			.last()
+			.satisfies(
+					record -> assertThat(record.key).isEqualTo(created.getId()),
+					record -> assertThat(record.value).isNull());
 	}
 	
 }

@@ -1,0 +1,25 @@
+@namespace("eu.cymo.scenario_6.users")
+protocol Users {
+
+	record UserUpserted {
+		string id;
+		string firstName;
+		string lastName;
+		string emailAddress;
+		boolean validated;
+	}
+
+	record OrderPlaced {
+		string id;
+		string userId;
+		string productId;
+	}
+
+	record OrderPlacedEnriched {
+		string id;
+		string userId;
+		string userEmailAddress;
+		string productId;
+	}
+	
+}

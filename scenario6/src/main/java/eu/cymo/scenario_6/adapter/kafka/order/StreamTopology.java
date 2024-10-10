@@ -13,8 +13,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import eu.cymo.scenario_6.adapter.kafka.AvroSerdeFactory;
-import eu.cymo.scenario_6.users.OrderPlaced;
-import eu.cymo.scenario_6.users.OrderPlacedEnriched;
+import eu.cymo.scenario_6.orders.OrderPlaced;
+import eu.cymo.scenario_6.orders.OrderPlacedEnriched;
 import eu.cymo.scenario_6.users.UserUpserted;
 
 @Component

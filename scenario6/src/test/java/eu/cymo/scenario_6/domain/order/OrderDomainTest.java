@@ -12,8 +12,8 @@ import org.springframework.context.annotation.ComponentScan;
 
 import eu.cymo.scenario_6.kafka_topology.TestTopic;
 import eu.cymo.scenario_6.kafka_topology.TopologyTest;
-import eu.cymo.scenario_6.users.OrderPlaced;
-import eu.cymo.scenario_6.users.OrderPlacedEnriched;
+import eu.cymo.scenario_6.orders.OrderPlaced;
+import eu.cymo.scenario_6.orders.OrderPlacedEnriched;
 import eu.cymo.scenario_6.users.UserUpserted;
 
 @TopologyTest(

@@ -38,6 +38,7 @@ public class OrderDomainTest {
 				.setFirstName("first-name")
 				.setLastName("last-name")
 				.setEmailAddress("email-address")
+				.setValidated(true)
 				.build();
 		var order = OrderPlaced.newBuilder()
 				.setId(UUID.randomUUID().toString())
@@ -88,6 +89,7 @@ public class OrderDomainTest {
 				.setFirstName("first-name")
 				.setLastName("last-name")
 				.setEmailAddress("email-address")
+				.setValidated(true)
 				.build();
 		var order = OrderPlaced.newBuilder()
 				.setId(UUID.randomUUID().toString())

@@ -63,4 +63,45 @@ public class OrderDomainTest {
 							.build()));
 	}
 	
+	@Test
+	void forwardsNothingWhenNoJoinDone() {
+		// given
+		var order = OrderPlaced.newBuilder()
+				.setId(UUID.randomUUID().toString())
+				.setUserId(UUID.randomUUID().toString())
+				.setProductId(UUID.randomUUID().toString())
+				.build();
+		
+		// when
+		ordersTopic.pipeInput(order.getId(), order);
+
+		// then
+		assertThat(ordersEnrichedTopic.readKeyValuesToList())
+			.isEmpty();
+	}
+	
+	@Test
+	void forwardsNothingWhenUserIdDoesNotMatch() {
+		// given
+		var user = UserUpserted.newBuilder()
+				.setId(UUID.randomUUID().toString())
+				.setFirstName("first-name")
+				.setLastName("last-name")
+				.setEmailAddress("email-address")
+				.build();
+		var order = OrderPlaced.newBuilder()
+				.setId(UUID.randomUUID().toString())
+				.setUserId(UUID.randomUUID().toString())
+				.setProductId(UUID.randomUUID().toString())
+				.build();
+		
+		// when
+		usersTopic.pipeInput(user.getId(), user);
+		ordersTopic.pipeInput(order.getId(), order);
+
+		// then
+		assertThat(ordersEnrichedTopic.readKeyValuesToList())
+			.isEmpty();
+	}
+	
 }

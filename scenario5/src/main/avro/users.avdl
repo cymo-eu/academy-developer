@@ -29,4 +29,7 @@ protocol Users {
 		string id;
 	}
 	
+	record TombStone {
+	}
+	
 }

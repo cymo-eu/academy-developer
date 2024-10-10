@@ -9,17 +9,4 @@ protocol Users {
 		boolean validated;
 	}
 
-	record OrderPlaced {
-		string id;
-		string userId;
-		string productId;
-	}
-
-	record OrderPlacedEnriched {
-		string id;
-		string userId;
-		string userEmailAddress;
-		string productId;
-	}
-	
 }

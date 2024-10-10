@@ -1,0 +1,11 @@
+@namespace("eu.cymo.scenario_8.users")
+protocol Users {
+
+	record UserOrdersPerMonth {
+		string id;
+		long orderCount;
+		string month;
+		int year;
+	}
+
+}

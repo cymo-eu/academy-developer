@@ -1,6 +1,8 @@
 package eu.cymo.scenario_7.kafka_topology;
 
 import java.lang.reflect.Field;
+import java.time.Duration;
+import java.time.Instant;
 
 import org.apache.kafka.streams.TestInputTopic;
 import org.apache.kafka.streams.TestOutputTopic;
@@ -54,7 +56,9 @@ public class TestTopicTestExecutionListener implements TestExecutionListener {
 				.createInputTopic(
 						topic(field, testContext),
 						FieldSerdes.getKeySerde(field, serdeFactory(testContext)).serializer(),
-						FieldSerdes.getValueSerde(field, serdeFactory(testContext)).serializer());
+						FieldSerdes.getValueSerde(field, serdeFactory(testContext)).serializer(),
+						Instant.ofEpochMilli(0),
+						Duration.ofSeconds(0));
 	}
 	
 	private TestOutputTopic<?, ?> createOutputTopic(Field field, TestContext testContext) {

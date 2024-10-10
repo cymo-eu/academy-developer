@@ -1,0 +1,9 @@
+topics:
+  users: users
+  orders: orders
+  orders-enriched: orders-enriched
+  
+spring:
+  kafka:
+    streams:
+      application-id: order-enriching-stream

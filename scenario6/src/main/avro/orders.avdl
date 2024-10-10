@@ -1,0 +1,17 @@
+@namespace("eu.cymo.scenario_6.orders")
+protocol Orders {
+
+	record OrderPlaced {
+		string id;
+		string userId;
+		string productId;
+	}
+
+	record OrderPlacedEnriched {
+		string id;
+		string userId;
+		string userEmailAddress;
+		string productId;
+	}
+	
+}

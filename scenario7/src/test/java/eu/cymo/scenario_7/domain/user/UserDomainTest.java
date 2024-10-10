@@ -46,7 +46,7 @@ public class UserDomainTest {
 		usersTopic.pipeInput(user.getId(), user);
 		
 		// when
-		driver.advanceWallClockTime(Duration.ofDays(32));
+		driver.advanceWallClockTime(Duration.ofDays(30));
 		
 		// then
 		verify(userMailService).sendValidateUserMail(argThat(u -> Objects.equals(u.id(), user.getId())));
@@ -65,9 +65,9 @@ public class UserDomainTest {
 		usersTopic.pipeInput(user.getId(), user);
 		
 		// when
-		driver.advanceWallClockTime(Duration.ofDays(32));
-		driver.advanceWallClockTime(Duration.ofDays(32));
-		driver.advanceWallClockTime(Duration.ofDays(32));
+		driver.advanceWallClockTime(Duration.ofDays(30));
+		driver.advanceWallClockTime(Duration.ofDays(30));
+		driver.advanceWallClockTime(Duration.ofDays(30));
 		
 		// then
 		verify(userMailService, times(1)).sendValidateUserMail(argThat(u -> Objects.equals(u.id(), user.getId())));
@@ -94,7 +94,7 @@ public class UserDomainTest {
 		usersTopic.pipeInput(user.getId(), userValidated);
 		
 		// when
-		driver.advanceWallClockTime(Duration.ofDays(32));
+		driver.advanceWallClockTime(Duration.ofDays(30));
 		
 		// then
 		verify(userMailService, never()).sendValidateUserMail(argThat(u -> Objects.equals(u.id(), user.getId())));

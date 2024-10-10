@@ -1,5 +1,6 @@
 package eu.cymo.scenario_7.kafka_topology;
 
+import java.time.Instant;
 import java.util.Properties;
 
 import org.apache.kafka.streams.Topology;
@@ -47,6 +48,6 @@ public class TopologyTestDriverTestExecutionListener implements TestExecutionLis
 		
 		var properties = new Properties();
 		properties.putAll(kafkaProperties.buildStreamsProperties(sslBundles.getIfAvailable()));
-		return new TopologyTestDriver(topology, properties);
+		return new TopologyTestDriver(topology, properties, Instant.ofEpochMilli(0));
 	}
 }

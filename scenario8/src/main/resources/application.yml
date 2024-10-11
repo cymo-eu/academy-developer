@@ -1,8 +1,8 @@
 topics:
   orders: orders
-  orders-per-user-per-months: orders-per-user-per-month
+  orders-per-user-per-day: orders-per-user-per-day
   
 spring:
   kafka:
     streams:
-      application-id: user-validation-mail-stream
+      application-id: orders-per-user-per-day-stream

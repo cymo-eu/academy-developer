@@ -1,11 +1,10 @@
 @namespace("eu.cymo.scenario_8.users")
 protocol Users {
 
-	record UserOrdersPerMonth {
+	record UserOrdersPerDay {
 		string id;
 		long orderCount;
-		string month;
-		int year;
+		date date;
 	}
 
 }

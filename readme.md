@@ -19,3 +19,4 @@ All the dependencies should be available & running with the following settings:
 | redpanda-console | localhost:8080 | http://localhost:8080/overview |
 | schema-registry  | localhost:8081 | -                              |
 | brokers          | localhost:9092 | -                              |
+

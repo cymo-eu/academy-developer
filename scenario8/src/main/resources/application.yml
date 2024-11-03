@@ -1,0 +1,8 @@
+topics:
+  orders: orders
+  orders-per-user-per-day: orders-per-user-per-day
+  
+spring:
+  kafka:
+    streams:
+      application-id: orders-per-user-per-day-stream

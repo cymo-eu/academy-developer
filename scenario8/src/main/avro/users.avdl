@@ -1,0 +1,10 @@
+@namespace("eu.cymo.scenario_8.users")
+protocol Users {
+
+	record UserOrdersPerDay {
+		string id;
+		long orderCount;
+		date date;
+	}
+
+}

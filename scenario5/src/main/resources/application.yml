@@ -1,0 +1,8 @@
+topics:
+  users: users
+  user-state: user-state
+  
+spring:
+  kafka:
+    streams:
+      application-id: validated-users-stream

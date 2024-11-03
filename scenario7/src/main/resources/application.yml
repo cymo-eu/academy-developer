@@ -1,0 +1,7 @@
+topics:
+  users: users
+  
+spring:
+  kafka:
+    streams:
+      application-id: user-validation-mail-stream

@@ -11,7 +11,7 @@
   <groupId>eu.cymo</groupId>
   <artifactId>scenario-5</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>webshop</name>
+  <name>webshop-scenario5</name>
 
   <properties>
     <java.version>17</java.version>

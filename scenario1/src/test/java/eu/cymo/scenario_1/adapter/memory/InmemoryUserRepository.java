@@ -11,7 +11,7 @@ import eu.cymo.scenario_1.domain.user.UserRepository;
 
 @Component
 public class InmemoryUserRepository implements UserRepository {
-	private Map<String, User> users = new ConcurrentHashMap<>();
+	private final Map<String, User> users = new ConcurrentHashMap<>();
 	
 	@Override
 	public void save(User user) {

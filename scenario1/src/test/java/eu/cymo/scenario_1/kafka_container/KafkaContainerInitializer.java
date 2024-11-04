@@ -12,7 +12,7 @@ public class KafkaContainerInitializer implements ApplicationContextInitializer<
 
 	@Override
 	public void initialize(ConfigurableApplicationContext applicationContext) {
-		var container = new KafkaContainer(DockerImageName.parse("confluentinc/cp-kafka:7.6.1"));
+		var container = new KafkaContainer(DockerImageName.parse("confluentinc/cp-kafka:7.7.1"));
 		container.start();
 		
 		applicationContext.getEnvironment().getPropertySources().addFirst(new MapPropertySource(
